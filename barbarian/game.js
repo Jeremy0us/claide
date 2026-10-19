@@ -761,7 +761,8 @@ function anyFirePressed() {
 }
 
 (function setupTouch() {
-  const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  canvas.addEventListener('pointerdown', () => { sndInit(); touch.tapped = true; window.focus(); });
+  const isTouch = matchMedia('(pointer: coarse)').matches;
   if (!isTouch) return;
   document.body.classList.add('touch');
   const stick = document.getElementById('stick'), knob = document.getElementById('knob'), fire = document.getElementById('fire');
@@ -782,7 +783,6 @@ function anyFirePressed() {
   fire.addEventListener('pointerdown', e => { sndInit(); e.preventDefault(); touch.fire = true; touch.tapped = true; fire.classList.add('on'); });
   const fu = () => { touch.fire = false; fire.classList.remove('on'); };
   fire.addEventListener('pointerup', fu); fire.addEventListener('pointercancel', fu); fire.addEventListener('pointerleave', fu);
-  canvas.addEventListener('pointerdown', () => { sndInit(); touch.tapped = true; });
 })();
 
 // ---------------------------------------------------------------------------
@@ -1371,7 +1371,7 @@ function renderBoot() {
   rect(0, 0, W, H, st(0, 0, 1));
   textC('BARBARIAN', 60, gradFire(28), 4, st(2, 0, 0));
   textC('A TRIBUTE TO THE ATARI ST CLASSIC', 104, GREY);
-  if ((G.t >> 4) & 1) textC('PRESS ANY KEY', 140, YELLOW);
+  if ((G.t >> 4) & 1) textC('PRESS ANY KEY OR CLICK', 140, YELLOW);
 }
 function renderTitle() {
   const tw = textW('BARBARIAN', 4), tx = Math.round((W - tw) / 2);
