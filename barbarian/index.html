@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<title>Barbarian</title>
+<style>
+  :root { --bg: #0a0a0a; --fg: #d6d1c4; --dim: #6f6a60; --line: #222; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg);
+    font: 12px/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 14px; padding: 8px; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; }
+  canvas { display: block; background: #000; image-rendering: pixelated; image-rendering: crisp-edges; }
+  .help { color: var(--dim); text-align: center; max-width: 900px; }
+  .help b { color: var(--fg); font-weight: normal; }
+  #touch { display: none; width: 100%; max-width: 900px; justify-content: space-between; align-items: center; padding: 0 12px; }
+  #stick { width: 132px; height: 132px; border: 1px solid #333; border-radius: 50%; position: relative; }
+  #knob { position: absolute; left: 50%; top: 50%; width: 46px; height: 46px; margin: -23px 0 0 -23px;
+    border-radius: 50%; background: #2a2a2a; border: 1px solid #444; }
+  #fire { width: 92px; height: 92px; border-radius: 50%; border: 1px solid #5a1a10; background: #2a0d08;
+    color: #c9a; font: inherit; letter-spacing: 2px; }
+  #fire.on { background: #6a1d10; }
+  .touch #touch { display: flex; }
+  .touch .help { display: none; }
+</style>
+</head>
+<body>
+  <canvas id="screen" width="320" height="200"></canvas>
+  <div id="touch"><div id="stick"><div id="knob"></div></div><button id="fire">FIRE</button></div>
+  <div class="help">
+    <b>1</b> one player &nbsp; <b>2</b> two players &nbsp; <b>D</b> demo &nbsp; <b>P</b> pause &nbsp; <b>M</b> sound &nbsp; <b>Esc</b> quit to title<br>
+    Player 1: <b>W A S D</b> (+ <b>Q E Z C</b> diagonals) &nbsp;fire <b>Space</b> &nbsp;·&nbsp;
+    Player 2: <b>Arrows</b> (+ numpad diagonals) &nbsp;fire <b>Enter</b> &nbsp;·&nbsp; gamepads work too<br>
+    In one-player mode either key set controls you. Hold fire and push the stick to attack — see the move list on the title screen.
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>
